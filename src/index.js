@@ -16,6 +16,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 function* rootSaga() {
   yield takeEvery('FETCH_PETS', petSaga)
+  yield takeEvery('CREATE_PET', createPet)
 }
 
 function* petSaga() {
@@ -28,6 +29,19 @@ function* petSaga() {
     })
   } catch (err) {
     console.log('ERROR in petSaga', err)
+  }
+}
+
+function* createPet(action) {
+  try {
+    const newPet = action.payload
+    yield axios.post(`/api/pets`, newPet)
+
+    yield put({
+      type: 'SET_PETS'
+    })
+  } catch (err) {
+    console.log('ERROR in createPet', err)
   }
 }
 
