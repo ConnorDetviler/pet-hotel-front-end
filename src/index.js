@@ -27,7 +27,7 @@ function* petSaga() {
       payload: petsGet.data
     })
   } catch (err) {
-    console.log(err)
+    console.log('ERROR in petSaga', err)
   }
 }
 
